@@ -1,0 +1,408 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.9
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1:3306
+-- Tiempo de generación: 10-05-2018 a las 16:23:09
+-- Versión del servidor: 5.7.21
+-- Versión de PHP: 5.6.35
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `bd_veterinaria`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cita`
+--
+
+CREATE TABLE `cita` (
+  `idCita` int(11) NOT NULL,
+  `idServicio` int(11) NOT NULL,
+  `idVeterinario` int(11) NOT NULL,
+  `idEmpleado` int(11) NOT NULL,
+  `fecha` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cliente`
+--
+
+CREATE TABLE `cliente` (
+  `idCliente` int(11) NOT NULL,
+  `nombreCliente` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `ApePaterno` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `ApeMaterno` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Direccion` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `dni` varchar(8) COLLATE utf8_spanish2_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_spanish2_ci NOT NULL,
+  `telefono` varchar(45) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`idCliente`, `nombreCliente`, `ApePaterno`, `ApeMaterno`, `Direccion`, `dni`, `password`, `telefono`) VALUES
+(44, 'administrador050', 'Barranzuela', 'Cuzcano', 'Jr perez de tu dela 2162 Mirones Bajos', '71425647', '$2y$10$e9fb4allyytFQVGvQEDtdOcMUXLDavtrQRDoKIS0EJHTWhjkmmbDe', '977163850'),
+(45, 'administrador020', 'ABCDEFG', 'ABCDEFGH', 'Jr Lima', '71425647', '$2y$10$4ijJHq47PjyTXRj00zugce3s.Y0ZyK2G13A26.wZ78o9e2Pbecrl2', '977163850');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_venta`
+--
+
+CREATE TABLE `detalle_venta` (
+  `idDetalle_Venta` int(11) NOT NULL,
+  `idVenta` int(11) NOT NULL,
+  `cant_producto` int(11) NOT NULL,
+  `precio_unit` decimal(9,2) NOT NULL,
+  `importe` decimal(9,2) NOT NULL,
+  `monto_total` decimal(9,2) NOT NULL,
+  `descripcion` varchar(100) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empleado`
+--
+
+CREATE TABLE `empleado` (
+  `idEmpleado` int(11) NOT NULL,
+  `nombreEmpleado` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `ApePaterno` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `ApeMaterno` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Direccion` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `dni` varchar(8) COLLATE utf8_spanish2_ci NOT NULL,
+  `password` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Telefono` varchar(13) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `paciente`
+--
+
+CREATE TABLE `paciente` (
+  `idPaciente` int(11) NOT NULL,
+  `NombreMasc` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Especie` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `idCliente` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `producto`
+--
+
+CREATE TABLE `producto` (
+  `idProducto` int(11) NOT NULL,
+  `NombreProduc` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `PrecioProduc` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `idProveedor` int(11) NOT NULL,
+  `idTipoProducto` int(11) NOT NULL,
+  `idStock` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `proveedor`
+--
+
+CREATE TABLE `proveedor` (
+  `idProveedor` int(11) NOT NULL,
+  `NombreProv` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `NombreProd` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Precio` decimal(9,2) NOT NULL,
+  `Telefono` varchar(13) COLLATE utf8_spanish2_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `servicio`
+--
+
+CREATE TABLE `servicio` (
+  `idServicio` int(11) NOT NULL,
+  `NombreServicio` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `costoServicio` varchar(45) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `stock`
+--
+
+CREATE TABLE `stock` (
+  `idStock` int(11) NOT NULL,
+  `totalStock` varchar(45) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_producto`
+--
+
+CREATE TABLE `tipo_producto` (
+  `idTipo_Producto` int(11) NOT NULL,
+  `nombre_tprod` varchar(45) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `venta`
+--
+
+CREATE TABLE `venta` (
+  `idVenta` int(11) NOT NULL,
+  `idProducto` int(11) NOT NULL,
+  `idCliente` int(11) NOT NULL,
+  `Fecha` datetime NOT NULL,
+  `num_comprobacion` varchar(45) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `veterinario`
+--
+
+CREATE TABLE `veterinario` (
+  `idVeterinario` int(11) NOT NULL,
+  `nombreEmpleado` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `ApePaterno` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `ApeMaterno` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Direccion` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `dni` varchar(8) COLLATE utf8_spanish2_ci NOT NULL,
+  `password` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Telefono` varchar(13) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `cita`
+--
+ALTER TABLE `cita`
+  ADD PRIMARY KEY (`idCita`),
+  ADD KEY `fk_cita_veterinario_idx` (`idVeterinario`),
+  ADD KEY `fk_cita_empleado_idx` (`idEmpleado`),
+  ADD KEY `fk_cita_servicio_idx` (`idServicio`);
+
+--
+-- Indices de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`idCliente`);
+
+--
+-- Indices de la tabla `detalle_venta`
+--
+ALTER TABLE `detalle_venta`
+  ADD PRIMARY KEY (`idDetalle_Venta`),
+  ADD KEY `fk_detalle_venta_idx` (`idVenta`);
+
+--
+-- Indices de la tabla `empleado`
+--
+ALTER TABLE `empleado`
+  ADD PRIMARY KEY (`idEmpleado`,`Telefono`);
+
+--
+-- Indices de la tabla `paciente`
+--
+ALTER TABLE `paciente`
+  ADD PRIMARY KEY (`idPaciente`),
+  ADD KEY `fk_paciente_cliente_idx` (`idCliente`);
+
+--
+-- Indices de la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD PRIMARY KEY (`idProducto`),
+  ADD KEY `fk_producto_tproducto_idx` (`idTipoProducto`),
+  ADD KEY `fk_producto_stock_idx` (`idStock`),
+  ADD KEY `fk_producto_proveedor_idx` (`idProveedor`);
+
+--
+-- Indices de la tabla `proveedor`
+--
+ALTER TABLE `proveedor`
+  ADD PRIMARY KEY (`idProveedor`);
+
+--
+-- Indices de la tabla `servicio`
+--
+ALTER TABLE `servicio`
+  ADD PRIMARY KEY (`idServicio`);
+
+--
+-- Indices de la tabla `stock`
+--
+ALTER TABLE `stock`
+  ADD PRIMARY KEY (`idStock`);
+
+--
+-- Indices de la tabla `tipo_producto`
+--
+ALTER TABLE `tipo_producto`
+  ADD PRIMARY KEY (`idTipo_Producto`);
+
+--
+-- Indices de la tabla `venta`
+--
+ALTER TABLE `venta`
+  ADD PRIMARY KEY (`idVenta`),
+  ADD KEY `fk_venta_cliente_idx` (`idCliente`),
+  ADD KEY `fk_venta_producto_idx` (`idProducto`);
+
+--
+-- Indices de la tabla `veterinario`
+--
+ALTER TABLE `veterinario`
+  ADD PRIMARY KEY (`idVeterinario`,`Telefono`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `cita`
+--
+ALTER TABLE `cita`
+  MODIFY `idCita` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_venta`
+--
+ALTER TABLE `detalle_venta`
+  MODIFY `idDetalle_Venta` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `empleado`
+--
+ALTER TABLE `empleado`
+  MODIFY `idEmpleado` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `paciente`
+--
+ALTER TABLE `paciente`
+  MODIFY `idPaciente` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `producto`
+--
+ALTER TABLE `producto`
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `proveedor`
+--
+ALTER TABLE `proveedor`
+  MODIFY `idProveedor` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `servicio`
+--
+ALTER TABLE `servicio`
+  MODIFY `idServicio` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `stock`
+--
+ALTER TABLE `stock`
+  MODIFY `idStock` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_producto`
+--
+ALTER TABLE `tipo_producto`
+  MODIFY `idTipo_Producto` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `venta`
+--
+ALTER TABLE `venta`
+  MODIFY `idVenta` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `veterinario`
+--
+ALTER TABLE `veterinario`
+  MODIFY `idVeterinario` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `cita`
+--
+ALTER TABLE `cita`
+  ADD CONSTRAINT `fk_cita_empleado` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_cita_servicio` FOREIGN KEY (`idServicio`) REFERENCES `servicio` (`idServicio`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_cita_veterinario` FOREIGN KEY (`idVeterinario`) REFERENCES `veterinario` (`idVeterinario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `detalle_venta`
+--
+ALTER TABLE `detalle_venta`
+  ADD CONSTRAINT `fk_detalle_venta` FOREIGN KEY (`idVenta`) REFERENCES `venta` (`idVenta`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `paciente`
+--
+ALTER TABLE `paciente`
+  ADD CONSTRAINT `fk_paciente_cliente` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD CONSTRAINT `fk_producto_proveedor` FOREIGN KEY (`idProveedor`) REFERENCES `proveedor` (`idProveedor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_producto_stock` FOREIGN KEY (`idStock`) REFERENCES `stock` (`idStock`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_producto_tproducto` FOREIGN KEY (`idTipoProducto`) REFERENCES `tipo_producto` (`idTipo_Producto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `venta`
+--
+ALTER TABLE `venta`
+  ADD CONSTRAINT `fk_venta_cliente` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_venta_producto` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

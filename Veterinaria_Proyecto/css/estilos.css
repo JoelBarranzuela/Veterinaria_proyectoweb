@@ -1,0 +1,44 @@
+
+body{
+background-image: url("../img/fondo.png");
+}
+
+.jumbotron{
+
+	background-color: #ffffff;
+	color: #777777;
+}
+
+.navbar
+{
+
+	background-color: #fff7f7;
+}
+.navbar-brand:link, .navbar-brand:visited {
+		color: #191819 !important;
+}
+
+.navbar-brand:hover, .navbar-brand:active
+{
+ 	
+  color: #8c6969 !important;
+}
+
+#navbar li a:link,#navbar li a:visited{
+
+	color: #191819 !important;
+}
+
+#navbar li a:hover,#navbar li a:active{
+	
+	color: #8c6969 !important;
+}
+
+.dropdown-menu {
+
+	background-color: #fff7f7; 
+}
+
+.open > a {
+	background-color:  #fff7f7 !important;
+}
